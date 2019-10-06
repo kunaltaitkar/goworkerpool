@@ -17,10 +17,10 @@ var cancelTriggered bool
 func TestWorkerPoolWithContext(t *testing.T) {
 	count = 0
 
-	tasks := []*TaskWithContext{}
+	tasks := []*Task{}
 
 	for index := 0; index < 1000; index++ {
-		tasks = append(tasks, NewTaskWithContext(index, incrementCount))
+		tasks = append(tasks, NewTask(index, incrementCount))
 	}
 
 	pool := NewPoolWithContext(tasks, 10)
@@ -47,10 +47,10 @@ func TestWorkerPoolWithContext(t *testing.T) {
 func TestWorkerpoolWithoutCancel(t *testing.T) {
 	count = 0
 
-	tasks := []*TaskWithContext{}
+	tasks := []*Task{}
 
 	for index := 0; index < 1000; index++ {
-		tasks = append(tasks, NewTaskWithContext(index, incrementCount))
+		tasks = append(tasks, NewTask(index, incrementCount))
 	}
 
 	pool := NewPoolWithContext(tasks, 10)

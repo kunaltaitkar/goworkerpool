@@ -14,14 +14,17 @@ func main() {
 
 	count = 0
 
-	tasks := []*workerpool.TaskWithContext{}
+	// preparing tasks
+	tasks := []*workerpool.Task{}
 
 	for index := 0; index < 1000; index++ {
-		tasks = append(tasks, workerpool.NewTaskWithContext(index, incrementCount))
+		tasks = append(tasks, workerpool.NewTask(index, incrementCount))
 	}
 
+	//initialize pool
 	pool := workerpool.NewPoolWithContext(tasks, 10)
 
+	// to check count value
 	ticker := time.NewTicker(1 * time.Millisecond)
 
 	// cancel all workers when count is more than 500
@@ -35,9 +38,10 @@ func main() {
 		}
 	}()
 
+	// run pool
 	pool.Run()
 
-	time.Sleep(20 * time.Second)
+	time.Sleep(10 * time.Second)
 }
 
 //incrementCount- increment count by 1
